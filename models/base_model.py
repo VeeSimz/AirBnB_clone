@@ -33,8 +33,8 @@ class BaseModel:
         This method is the dictionary aspect which transform the code
         to dictionary type
         """
-        new_dict = __.dict__(copy)
+        new_dict = self.__dict__.copy()
         new_dict['__class__'] = type(self).__name__
         new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.upfated_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
         return (new_dict)
