@@ -1,11 +1,9 @@
 #!/usr/bin/python3
 """ Module that contain different methods """
 
-""" import datetime
-    from datetime import datetime
-"""
 from uuid import uuid4
 from datetime import datetime
+
 
 class BaseModel:
     """ definition of class, named (BaseModel)
@@ -22,15 +20,16 @@ class BaseModel:
     def __str__(self):
         """ Returns a string representation of the object
         """
-        return ("[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__))
+        return ("[{}] ({}) {}".format
+                (type(self).__name__, self.id, self.__dict__))
 
     def save(self):
         """ This method will save the updated_at instance attribute
         """
         self.updated_at = datetime.now()
 
-    to_dict(self):
-        """ 
+    def to_dict(self):
+        """
         This method is the dictionary aspect which transform the code
         to dictionary type
         """
@@ -39,4 +38,3 @@ class BaseModel:
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.upfated_at.isoformat()
         return (new_dict)
-
