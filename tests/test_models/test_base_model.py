@@ -32,3 +32,6 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('id', new_dict)
 
         self.assertEqual(new_dict['id'], self.real_model.id)
+
+        if __name__ == "__main__":
+            unittest.main()
