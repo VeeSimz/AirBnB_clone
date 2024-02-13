@@ -1,8 +1,13 @@
+#!/usr/bin/python3
+""" Defines unnitest framework for each test suite """
 import unittest
 from datetime import datetime, timedelta
 from models.base_model import BaseModel
 
 class TestBaseModel(unittest.TestCase):
+    """ Unnitest initialization for the class area """
+
+
      def setUp(self):
          self.real_model = BaseModel()
 
