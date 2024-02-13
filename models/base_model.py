@@ -23,9 +23,11 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if "created_at" == key:
-                    self.created_at = datetime.strptime(kwargs["created_at"], date_format)
+                    self.created_at = datetime.strptime
+                    (kwargs["created_at"], date_format)
                 elif "updated_at" == key:
-                    self.updated_at = datetime.strptime(kwargs["updated_at"], date_format)
+                    self.updated_at = datetime.strptime
+                    (kwargs["updated_at"], date_format)
                 elif "__class__" == key:
                     pass
                 else:
