@@ -7,15 +7,33 @@ from datetime import datetime
 
 class BaseModel:
     """ definition of class, named (BaseModel)
+
+    Attributes:
+        id (str): A unique identifier generated using uuid4.
+        created_at (datetime): time created at the beginning.
+        updated_at (datetime): updated time which was saved.
     """
-    def __init__(self):
+
+    def __init__(self, *args, **kwargs):
         """
         The instance of class with public
         instance attributes: id, created_at, updated_at
         """
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        date_format = '%Y-%m-%dT%H:%M:%S.%f'
+        if kwargs:
+            for key, value in kwargs.items():
+                if "created_at" == key:
+                    self.created_at = datetime.strptime(kwargs["created_at"], date_format)
+                elif "updated_at" == key:
+                    self.updated_at = datetime.strptime(kwargs["updated_at"], date_format)
+                elif "__class__" == key:
+                    pass
+                else:
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ Returns a string representation of the object
