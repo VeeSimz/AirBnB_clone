@@ -40,5 +40,5 @@ class TestBaseModel(unittest.TestCase):
         # check if 'id' in new_dict matches the model's id
         self.assertEqual(new_dict['id'], self.real_model.id)
 
-        if name == '__main__':
+        if __name__ == '__main__':
             unnitest.main()
