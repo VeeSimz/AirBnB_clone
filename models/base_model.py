@@ -29,9 +29,7 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        """
-        This method is the dictionary aspect which transform the code
-        to dictionary type
+        """This set the dictionary aspect of the code
         """
         new_dict = self.__dict__.copy()
         new_dict['__class__'] = type(self).__name__
