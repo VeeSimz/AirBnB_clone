@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-import cmd
-import sys
+import cmd, sys
 from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
+    """ Program that implements a console terminal. """
 
     prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
 
