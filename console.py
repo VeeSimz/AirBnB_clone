@@ -1,13 +1,14 @@
 #!/usr/bin/python3
+""" This module writes a program that prints to the console"""
 
 import cmd, sys
-from models.base_model import BaseModel
+#from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
     """ Program that implements a console terminal. """
 
-    prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
+    prompt = "(hbnb) "
 
     def emptyline(self):
         """Empty line"""
