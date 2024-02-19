@@ -2,6 +2,7 @@
 """ Module that uses JSON format to print data """
 
 import json
+from models.base_model import BaseModel
 
 class FileStorage:
     """ This part defines the class name with methods
@@ -28,7 +29,8 @@ class FileStorage:
         """ This method set the obj with key <obj class name>.id """
         if obj:
             key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-            return self.__objects[key] = obj
+            self.__objects[key] = obj
+            return obj
 
     def save(self):
         """ This serializes __objects to the JSON file """
@@ -49,4 +51,3 @@ class FileStorage:
                 
         except FileNotFoundError:
             pass
-
