@@ -13,9 +13,12 @@ class FileStorage:
     Class attributes:
         __file_path(str): the path to the file in use
         __objects(str): the object aspect
+        class_dict(dict): rep all the dict class
     """
     __file_path = "file.json"
     __objects = {}
+    class_dict = {"BaseModdel": BaseModel}
+    
 
     def all(self):
         """ This returns all the objcet in the dict """
@@ -38,7 +41,7 @@ class FileStorage:
     def reload(self):
         """ This method deserialize the dict objects """
         try:
-            with open(self.__file_path, 'w', encoding="UTF-8") as f:
+            with open(self.__file_path, 'r', encoding="UTF-8") as f:
                 another_json = json.load(f)
                 for key, value in another_json.items():
                     obj = self.class_dict[value['__class__']](**value)
