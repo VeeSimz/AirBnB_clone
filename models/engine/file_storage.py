@@ -4,6 +4,7 @@
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """ This part defines the class name with methods
     Methods:
@@ -16,10 +17,10 @@ class FileStorage:
         __objects(str): the object aspect
         class_dict(dict): rep all the dict class
     """
+
     __file_path = "file.json"
     __objects = {}
     class_dict = {"BaseModdel": BaseModel}
-    
 
     def all(self):
         """ This returns all the objcet in the dict """
@@ -48,6 +49,6 @@ class FileStorage:
                 for key, value in another_json.items():
                     obj = self.class_dict[value['__class__']](**value)
                     self.__objects[key] = obj
-                
+
         except FileNotFoundError:
             pass
