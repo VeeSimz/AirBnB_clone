@@ -20,7 +20,9 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
-    class_dict = {"BaseModdel": BaseModel}
+    class_dict = {
+            "BaseModel": BaseModel
+            }
 
     def all(self):
         """ This returns all the objcet in the dict """
@@ -31,24 +33,23 @@ class FileStorage:
         if obj:
             key = '{}.{}'.format(obj.__class__.__name__, obj.id)
             self.__objects[key] = obj
-            return obj
 
     def save(self):
         """ This serializes __objects to the JSON file """
         unit_serializer = {}
-        for key,  obj in self.__objects.items():
+        for key, obj in self.__objects.items():
             unit_serializer[key] = obj.to_dict()
-            with open(self.__file_path, 'w', encoding="UTF-8") as f:
-                json.dump(unit_serializer, f)
+        with open(self.__file_path, 'w', encoding="UTF-8") as f:
+            json.dump(unit_serializer, f)
 
     def reload(self):
         """ This method deserialize the dict objects """
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as f:
                 another_json = json.load(f)
-                for key, value in another_json.items():
-                    obj = self.class_dict[value['__class__']](**value)
-                    self.__objects[key] = obj
+            for key, value in another_json.items():
+                obj = self.class_dict[value['__class__']](**value)
+                self.__objects[key] = obj
 
         except FileNotFoundError:
             pass

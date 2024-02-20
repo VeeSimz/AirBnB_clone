@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-""" Module that prints dictionary format """
-from datetime import datetime
-from uuid import uuid4
+""" Module that contain different methods used """
 import models
+from uuid import uuid4
+from datetime import datetime
 
 
-class BaseModel:
-    """Definition of class, named (BaseModel)
+class BaseModel():
+    """ definition of class, named (BaseModel)
+
     Methods:
     __init__(args, kwargs)
     save(self)
@@ -23,13 +24,13 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if "created_at" == key:
-                    self.created_at = datetime.strptime(value, date_format)
+                    self.created_at = datetime.strptime
+                    (kwargs["created_at"], date_format)
                 elif "updated_at" == key:
-                    self.updated_at = datetime.strptime(value, date_format)
+                    self.updated_at = datetime.strptime
+                    (kwargs["updated_at"], date_format)
                 elif "__class__" == key:
                     pass
-                elif "id" == key:
-                    setattr(self, key, value)
                 else:
                     setattr(self, key, value)
         else:
@@ -39,25 +40,25 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """Returns a string representation of the object
+        """ Returns a string representation of the object
         """
-        return "[{}] ({}) {}".format
-    (self.__class__.__name__, self.id, self.__dict__)
+        return ("[{}] ({}) {}".format
+                (self.__class__.__name__, self.id, self.__dict__))
 
-    def __repr__(self):
-        """
-        Returns the official string representation
-        """
-        return self.__str__()
+        def __repr__(self):
+            """
+            return the official string representaion
+            """
+            return (self.__str__())
 
     def save(self):
-        """This method will save the updated_at instance attribute
+        """ This method will save the updated_at instance attribute
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """This sets the dictionary aspect of the code
+        """This set the dictionary aspect of the code
         """
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
