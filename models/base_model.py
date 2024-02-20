@@ -5,7 +5,7 @@ from uuid import uuid4
 import models
 
 
-class BaseModel:
+class BaseModel():
     """Definition of class, named (BaseModel)
     Methods:
     __init__(args, kwargs)
@@ -41,8 +41,8 @@ class BaseModel:
     def __str__(self):
         """Returns a string representation of the object
         """
-        return "[{}] ({}) {}".format
-    (self.__class__.__name__, self.id, self.__dict__)
+        return ("[{}] ({}) {}".
+                format(self.__class__.__name__, self.id, self.__dict__))
 
     def __repr__(self):
         """
