@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """ This module writes a program that prints to the console"""
 
-import cmd, sys
+import cmd
 import re
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
+
 
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
@@ -23,6 +24,7 @@ def parse(arg):
         retl = [i.strip(",") for i in lexer]
         retl.append(curly_braces.group())
         return retl
+
 
 class HBNBCommand(cmd.Cmd):
     """ Program that implements a console terminal. """
@@ -72,14 +74,15 @@ class HBNBCommand(cmd.Cmd):
             print(obje_dict["{}.{}".format(arg_var[0], arg_var[1])])
 
     def do_destroy(self, argu):
-        """ This method is used to delete an instance based on the class name and id """
+        """ This method is used to delete an instance based
+        on the class name and id """
         arg_var = parse(argu)
         obje_dict = storage.all()
 
         if len(arg_var) == 0:
             print("** class name missing **")
         elif argl[0] not in HBNBCommand.my_classes:
-             print("** class doesn't exist **")
+            print("** class doesn't exist **")
         elif len(arg_var) == 1:
             print("** instance id missing **")
         elif "{}.{}".format(argl[0], argl[1]) not in obje_dict.keys():
@@ -89,7 +92,8 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, argu):
-        """ This method prints all string representations of instances based or not on the class name """
+        """ This method prints all string representations of
+        instances based or not on the class name """
         arg_var = parse(argu)
 
         if len(arg_var) > 0 and arg_var[0] not in HBNBCommand.my_classes:
@@ -122,16 +126,27 @@ class HBNBCommand(cmd.Cmd):
             return False
         if len(arg_var) == 2:
             print("** attribute name missing **")
-             return False
+            return False
         if len(arg_var) == 3:
-            try:
-                type(eval(arg_var[2])) != dict
-            except NameError:
-                print("** value missing **")
-                return False
-        if len(argu_var) == 4:
-            obj = print("{}.{}".format(arg_var[0], arg_var[1])
-
+            print("** value missing **")
+            return False
+        if len(arg_var) == 4:
+            obj = stored_dic["{}.{}".format(arg_var[0], arg_var[1])]
+            if arg_var[2] in obj.__class__.__dict__.keys():
+                val_in = type(obj.__class__.__dict__[arg_var[2]])
+                obj.__dict__[arg_var[2]] = val_in(arg_var[3])
+            else:
+                obj.__dict__[arg_var[2]] = arg_var[3]
+        elif type(eval(arg_var[2])) == dict:
+            obj = stored_dic["{}.{}".format(arg_var[0], arg_var[1])]
+            for el, em in eval(arg_var[3]).items():
+                if (el in obj.__class__.__dict__.keys() and
+                        type(obj.__class__.__dict__[el]) in {str, int, float}):
+                    val_in = type(obj.__class__.__dict__[el])
+                    obj.__dict__[el] = val_in(em)
+                else:
+                    obj.__dict__[el] = em
+        storage.save()
 
     @staticmethod
     def do_quit(_):
