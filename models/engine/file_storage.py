@@ -2,8 +2,8 @@
 '''This is a module named File Storage'''
 import json
 from models.base_model import BaseModel
-"""from models.user import User
-from models.state import State
+from models.user import User
+"""from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.place import Place
@@ -17,7 +17,7 @@ class FileStorage:
         all: Returns the dictionary object
         new: updates the dictionary with class name and id
         save: Serializes python objects into JSON strings
-        reload: Deserializes, or converts JSON strings into Python key and values
+        reload: Deserializes, or converts JSON strings into key and val
     Class Attributes:
         __file_path (str): The name of the json file
         __objects (dict): A dictionary of created instantiated objects.
@@ -26,7 +26,7 @@ class FileStorage:
 
     __file_path = 'file.json'
     __objects = {}
-    class_init = {"BaseModel": BaseModel} 
+    class_init = {"BaseModel": BaseModel, "User": User}
     """User": User, "Place": Place,
                   "Amenity": Amenity, "City": City, "Review": Review,
                   "State": State} """
