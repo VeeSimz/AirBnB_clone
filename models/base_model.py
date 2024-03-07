@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module that define class named BaseModel in AiBnB project """
+""" Module that defines class named BaseModel in AiBnB project """
 from datetime import datetime
 from uuid import uuid4
 import models
