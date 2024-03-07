@@ -1,35 +1,46 @@
 #!/usr/bin/python3
-""" Module that prints dictionary format """
+""" Module that define class named BaseModel """
 from datetime import datetime
 from uuid import uuid4
 import models
 
 
 class BaseModel():
-    """Definition of class, named (BaseModel)
+    """ BaseModel class for the AirBnB clone project.
+    Attributes:
+    None
+
     Methods:
-    __init__(args, kwargs)
-    save(self)
-    __repr__(self)
-    __str(self)__
+        __init__(self, *args, **kwargs)
+        __str__(self)
+        __save(self)
+        __repr__(self)
+        to_dict(self)
     """
 
     def __init__(self, *args, **kwargs):
+        """ Initialize a new BaseModel instance.
+
+        Args:
+            args: Variable arguments.
+            kwargs: Keyword arguments with instance attributes.
+
+        Attributes:
+            id (str): A unique identifier for each instance.
+            created_at (datetime): The date and time when it is created.
+            updated_at (datetime): The date and time it is updated.
         """
-        The instance of class with public
-        instance attributes: id, created_at, updated_at
-        """
-        date_format = '%Y-%m-%dT%H:%M:%S.%f'
+        data_format = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs:
             for key, value in kwargs.items():
                 if "created_at" == key:
-                    self.created_at = datetime.strptime(value, date_format)
+                    self.created_at = datetime.strptime(kwargs["created_at"],
+                                                        data_format)
                 elif "updated_at" == key:
-                    self.updated_at = datetime.strptime(value, date_format)
+                    self.updated_at = datetime.strptime(kwargs["updated_at"],
+                                                        data_format)
                 elif "__class__" == key:
                     pass
-                elif "id" == key:
-                    setattr(self, key, value)
                 else:
                     setattr(self, key, value)
         else:
@@ -39,29 +50,34 @@ class BaseModel():
             models.storage.new(self)
 
     def __str__(self):
-        """Returns a string representation of the object
         """
-        return ("[{}] ({}) {}".
+        Return class name, id, and the dictionary
+        """
+        return ('[{}] ({}) {}'.
                 format(self.__class__.__name__, self.id, self.__dict__))
 
     def __repr__(self):
         """
-        Returns the official string representation
+        returns string repr
         """
-        return self.__str__()
+        return (self.__str__())
 
     def save(self):
-        """This method will save the updated_at instance attribute
+        """
+        Instance method to:
+        - update current datetime
+        - invoke save() function &
+        - save to serialized file
         """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        """This sets the dictionary aspect of the code
         """
-        new_dict = self.__dict__.copy()
-        new_dict["__class__"] = self.__class__.__name__
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
-
-        return new_dict
+        Return dictionary of BaseModel with string formats of times
+        """
+        print_dic = self.__dict__.copy()
+        print_dic["created_at"] = self.created_at.isoformat()
+        print_dic["updated_at"] = self.updated_at.isoformat()
+        print_dic["__class__"] = self.__class__.__name__
+        return print_dic
