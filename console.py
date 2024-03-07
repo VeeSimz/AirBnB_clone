@@ -6,8 +6,8 @@ import re
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
-"""from models.user import User
-from models.place import Place
+from models.user import User
+"""from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def default(self, arg):
-        """Default behavior for cmd module when input is invalid"""
+        """Default behavior for cmd module that accept arg"""
         argdict = {
             "all": self.do_all,
             "show": self.do_show,
