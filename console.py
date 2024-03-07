@@ -77,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
         print("Exit the program.")
 
     def help_EOF(self):
-        """Print help message for the EOF command."""
+        """Print help message for the EOF"""
         print("Exit the program using EOF (Ctrl+D).")
 
     def do_create(self, arg):
