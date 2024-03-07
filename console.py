@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
         elif "{}.{}".format(arg_len[0], arg_len[1]) not in obje_dict.keys():
             print("** no instance found **")
         else:
-            del obje_dict["{}.{}".format(argl[0], argl[1])]
+            del obje_dict["{}.{}".format(arg_len[0], arg_len[1])]
             storage.save()
 
     def do_all(self, arg):
