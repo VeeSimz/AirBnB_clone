@@ -7,12 +7,11 @@ from shlex import split
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
-"""from models.place import Place
+from models.place import Place
 from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-"""
 
 
 def parse(arg):
@@ -36,7 +35,15 @@ def parse(arg):
 class HBNBCommand(cmd.Cmd):
     """Command interpreter for the HBNB console."""
     prompt = "(hbnb) "
-    __classes = {"BaseModel": BaseModel}
+    __classes = {
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Place",
+        "Amenity",
+        "Review"
+        }
 
     def emptyline(self):
         """Do nothing on an empty line."""
