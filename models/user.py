@@ -9,7 +9,6 @@ import json
 class User(BaseModel):
     """Class User:
     Represents a user in the system, inherits from BaseModel.
-    
     Public Class Attributes:
     - email (str): empty string
     - password (str): empty string
